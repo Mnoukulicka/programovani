@@ -40,7 +40,6 @@ function draw() {
    
     if (player.x>width){
       player.x = 0
-    
     }
     if (player.x<0){
       player.x = width

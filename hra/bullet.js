@@ -15,10 +15,11 @@ class Bullet{
       if (this.mypos.x < 0) bullets.splice(bullets.indexOf(this), 1)
       if (this.mypos.y > height) bullets.splice(bullets.indexOf(this), 1)
       if (this.mypos.y < 0) bullets.splice(bullets.indexOf(this), 1)
-      for (var enemy of enemies)
-      if(((p5.Vector.sub (enemy.mypos, this.mypos)) - enemySize - bulletSize) < 0){
+      for (var enemy of enemies){
+       if(((p5.Vector.sub (enemy.mypos, this.mypos)) - enemySize - bulletSize) < 0){
         bullets.splice(bullets.indexOf(this), 1)
         enemies.splice(enemies.indexOf(enemy), 1)
       }
+    }
     }
  }

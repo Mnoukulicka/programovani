@@ -1,3 +1,4 @@
+
 function setup() {
     noCanvas();
 
@@ -14,5 +15,9 @@ function setup() {
 //      for(int i = 0; i < max; i++) - udělá něco max-krát, do proměnné i nastaví postupně čísla od 0 do (max - 1)
 //      return x - vrátí z funkce hodnotu x
 function findMin(list) {
-    return 0
+    var a = list[0]
+    for (let i = 0; i < list.length; i++){
+        if (a > list[i]) a = list[i]
+    }
+    return a
 }
