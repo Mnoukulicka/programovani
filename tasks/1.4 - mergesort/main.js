@@ -5,7 +5,33 @@ function setup() {
 
     print(`Sorted: ${mergesort(randomList)}`);
 }
-
+function merge(listA, listB) {
+    let out = []
+    var length = listA.length + listB.length
+    for (let i = 0; i < length; i++){
+        var minA = listA.length > 0 ? listA[0] : 1000
+        var minB = listB.length > 0 ? listB[0] : 1000
+        print(minA, minB)
+        if (listB.length == 0 || minA < minB) {
+            out.push(minA)
+            listA.splice(0, 1)
+        }
+        else {
+            out.push(minB)
+            listB.splice(0, 1)
+        }
+        if (listA.length == 0)  minA = 101
+        if (listB.length == 0)  minB = 101
+    }
+    return out;
+}   
+function findMin(list) {
+    var a = list[0]
+    for (let i = 0; i < list.length; i++){
+        if (a > list[i]) a = list[i]
+    }
+    return a
+}
 // Doplňte funkci mergesort, aby rekurzivně setřídila seznam
 // Princip je jednoduchý:
 //      - abychom setřídili seznam, stačí nám setřídit zvlášť jeho levou polovinu a
@@ -17,5 +43,15 @@ function setup() {
 // Je to často velmi jednoduchý způsob jak naprogramovat něco složitého, ale pozor na to aby opakované volání funkce někdy skončilo
 // Je velmi lehké pomocí rekurze vytvořit program, který nikdy neskončí
 function mergesort(list) {
+    var length = list.length/2
+    var left = list.slice(0, length)
+    var right = list.slice(length, list.length)
+    if (left.length == 1) 
+     if (right.length == 1) 
+      merge(right, left)
+    if (left.length =! 1)
+    mergesort(left)
+    if (right.length =! 1)
+    mergesort(right)
     return list;
-}
+}     

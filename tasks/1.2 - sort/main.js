@@ -26,9 +26,9 @@ function findMin(list) {
 // nový seznam bude potom obsahovat stejná čísla jako původní, ale ve správněm pořadí
 function mySort(list) {
     var list2 = []
-    var min = list[0]
-    var lenght = list.lenght
-    for (let i = 0; i < lenght; i++){
+    var min = 0
+    var length = list.length
+    for (let i = 0; i < length; i++){
       min = findMin(list)
       list2.push (findMin(list))
       list.splice(list.indexOf(min), 1)
