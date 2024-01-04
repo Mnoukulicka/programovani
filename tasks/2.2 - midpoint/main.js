@@ -13,5 +13,8 @@
 //      - vector.sub(v) - odečte od vektoru vektor v
 // Pokud je vaše řešení správně, bude vaše čára vždy končit v červeném bodě
 function drawLine(pointA, pointB) {
-    
+    let pt = p5.Vector.sub(pointB, pointA)
+    pt.div(2)
+    pt.add(pointA)
+    line(pointA.x, pointA.y, pt.x, pt.y)
 }

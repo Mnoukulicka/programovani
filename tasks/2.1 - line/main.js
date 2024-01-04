@@ -7,5 +7,5 @@
 //      - vector.x - x-ová složka vektoru
 //      - vector.y - y-ová složka vektoru
 function drawLine(pointA, pointB) {
-    
+       line (pointA.x, pointA.y, pointB.x, pointB.y)
 }

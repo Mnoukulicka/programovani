@@ -4,6 +4,7 @@ class Bullet{
      this.mypos = player.copy()
      var mouse = createVector(mouseX, mouseY)
      this.mydir = p5.Vector.sub (mouse, this.mypos)
+     this.mydir.add(random(-5, 5))
      this.mydir.setMag(this.myspeed)
     }
  

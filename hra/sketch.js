@@ -3,6 +3,9 @@ const playerSpeed = 5;
 const bulletSize = 1
 const enemySize = 5;
 const bulletSpeed = 7
+var time = 0
+var time2 = 0
+var ammo = 10
 var enemies = []
 var bullets = []
 var player;
@@ -21,17 +24,29 @@ function setup() {
 
 function draw() {
     background(220);
-
+    time ++
     var dir = createVector();
     if (Input.keyPressed('a')) dir.x -= 1;
     if (Input.keyPressed('d')) dir.x += 1;
     if (Input.keyPressed('w')) dir.y -= 1;
     if (Input.keyPressed('s')) dir.y += 1;
     if (Input.keyPressed(' ')) {
-     if  (bullets.length < 200) {
-      var bullet = new Bullet(player, bulletSpeed)
-      bullets.push(bullet)
+     if (time>10) {
+      if  (bullets.length < 200) {
+      if (ammo > 0){
+        var bullet = new Bullet(player, bulletSpeed)
+        bullets.push(bullet)
+        time = 0
+        ammo = ammo - 1
+      }
      }
+    }
+    else time2 ++
+    }
+    if (time2 > 50){ 
+      time2 = 0
+      if (ammo == 0)
+      ammo = 50
     }
     dir.setMag(playerSpeed);
     player.add(dir);

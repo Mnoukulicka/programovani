@@ -14,5 +14,9 @@
 //      - vector.setMag(x) - nastaví délku vektoru na x
 // Pokud je vaše řešení správně, bude vaše čára vždy končit v červeném bodě
 function drawLine(pointA, pointB, length) {
-    
+      let LINE =createVector()
+      LINE = p5.Vector.sub(pointB, pointA)
+      LINE.setMag(length)
+      LINE.add(pointA)
+      line(pointA.x, pointA.y, LINE.x, LINE.y)
 }

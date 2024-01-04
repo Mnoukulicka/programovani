@@ -33,7 +33,6 @@ function merge(listA, listB) {
     for (let i = 0; i < length; i++){
         var minA = listA.length > 0 ? listA[0] : 1000
         var minB = listB.length > 0 ? listB[0] : 1000
-        print(minA, minB)
         if (listB.length == 0 || minA < minB) {
             out.push(minA)
             listA.splice(0, 1)

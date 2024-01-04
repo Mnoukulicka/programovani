@@ -11,7 +11,6 @@ function merge(listA, listB) {
     for (let i = 0; i < length; i++){
         var minA = listA.length > 0 ? listA[0] : 1000
         var minB = listB.length > 0 ? listB[0] : 1000
-        print(minA, minB)
         if (listB.length == 0 || minA < minB) {
             out.push(minA)
             listA.splice(0, 1)
@@ -43,15 +42,13 @@ function findMin(list) {
 // Je to často velmi jednoduchý způsob jak naprogramovat něco složitého, ale pozor na to aby opakované volání funkce někdy skončilo
 // Je velmi lehké pomocí rekurze vytvořit program, který nikdy neskončí
 function mergesort(list) {
+    if (list.length == 1)
+        return list
     var length = list.length/2
     var left = list.slice(0, length)
     var right = list.slice(length, list.length)
-    if (left.length == 1) 
-     if (right.length == 1) 
-      merge(right, left)
-    if (left.length =! 1)
-    mergesort(left)
-    if (right.length =! 1)
-    mergesort(right)
-    return list;
-}     
+    
+    left = mergesort(left)
+    right = mergesort(right)
+    return merge(left,right)
+} 

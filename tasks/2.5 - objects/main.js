@@ -17,8 +17,10 @@
 //          - (x se může jmenovat jak chceme) 
 //          - na místě 'const' může být i 'let' nebo 'var', v tomto případě na tom moc nezáleží
 function follow(objects, target) {
-    let dir = createVector(1, 0);
+    let dir = createVector();
     for (const object of objects) {
+        dir = p5.Vector.sub(target, object)
+        dir.setMag(2)
         object.add(dir);
     }
 }
