@@ -20,7 +20,7 @@ function follow(objects, target) {
     let dir = createVector();
     for (const object of objects) {
         dir = p5.Vector.sub(target, object)
-        dir.setMag(2)
+        dir.setMag(2) d
         object.add(dir);
     }
 }
