@@ -16,7 +16,10 @@ class Rigidbody {
         this.vel.add(createVector(0, 0.3));
     }
     
-    loop() {
-
+    loop() { 
+        if (this.pos.y>height) this.pos.y = 0
+        if (this.pos.y<0) this.pos.y = height
+        if (this.pos.x>width) this.pos.x = 0
+        if (this.pos.x<0) this.pos.x = width
     }
 }

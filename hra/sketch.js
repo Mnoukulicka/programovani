@@ -41,7 +41,7 @@ function draw() {
       }
      }
     }
-    else time2 ++
+    if (time<10) time2 ++
     }
     if (time2 > 50){ 
       time2 = 0
