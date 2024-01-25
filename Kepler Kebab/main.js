@@ -6,7 +6,7 @@ class Circle{
  }
 
  draw(){
-    fill(252)
+    fill(12)
     text("B", this.BposB.x, this.BposB.y, size)
 
  }
@@ -16,11 +16,11 @@ function setup () {
     var circlerx = 0
     var circlery = 0
   createCanvas(400, 400)
-  background(51)
+  background(200)
   for(i = 0; i<100; i ++){
     circlerx ++
     circlery ++
-    let circler = new Circle(random(width), random(height), random(1, 20))
+    let circler = new Circle(random(width), random(height), i)
     CIRCLER.push(circler)
  }
 }
