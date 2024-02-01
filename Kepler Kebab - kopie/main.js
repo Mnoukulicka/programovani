@@ -26,7 +26,7 @@ class Circle{
   text("B", 0, 0)
   pop()
  }
-
+  hg
   update(){
    
     this.speedin.add(this.grav)
