@@ -63,6 +63,10 @@ new GameObject(width/2 + 50, height/2 +50).addComponent(new BoxCollider(50, 5)).
     fill(0, 0, 252)
     noStroke()
 }))
+new GameObject(width/2 + 50, height/2 -50).addComponent(new RectRenderer(50, 5, () => {
+    fill(0, 0, 252)
+    noStroke()
+}))
 
 
     Engine.start();
