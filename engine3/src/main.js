@@ -98,6 +98,14 @@ function setup() {
     }))
     .addComponent(new DynamicBoxCollider(20, 20))
     .addComponent(new Enemy(width / 2 -100, width / 2 +70))
+
+    new GameObject(width / 2 -20, height/2 -170)
+    .addComponent(new RectRenderer(20, 20, () => {
+        noStroke(0);
+        fill(255, 0, 0);
+    }))
+    .addComponent(new DynamicBoxCollider(20, 20))
+    .addComponent(new Pushable())
 }
 
 function draw() {
