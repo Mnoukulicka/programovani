@@ -106,6 +106,15 @@ function setup() {
     }))
     .addComponent(new DynamicBoxCollider(20, 20))
     .addComponent(new Pushable())
+
+    
+    new GameObject(width / 2 -200, height/2 -170)
+    .addComponent(new RectRenderer(20, 20, () => {
+        noStroke(0);
+        fill(255, 0, 0);
+    }))
+    .addComponent(new DynamicBoxCollider(20, 20))
+    .addComponent(new Teleport())
 }
 
 function draw() {
