@@ -22,7 +22,7 @@ class Enemy extends Component{
    this.rb.onCollisionEnter = (col) => {
         if (col.hit.normal.y == 1 && col.hit.normal.x == 0) this.rb.gameObject.destroy()
         else if (col.hit.normal.y == 0){
-       // if (col.collider.DynamicBoxCollider.getComponent(Player) !== undefined) lives = lives -1
+       if (!col.collider.getComponent(Player)) lives = lives -1
        if (this.rb.vel.x = 2) this.rb.vel.x = -2
        if (this.rb.vel.x = -2) this.rb.vel.x = 2
     }
