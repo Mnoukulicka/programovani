@@ -41,10 +41,10 @@ class Turret extends Component{
         this.srbx2 = this.srb.size.x
         this.srby1 = this.s.pos.y - srb.size.y / 2
         this.srby2 = this.srb.size.y
-        if (this.srbx2 < this.x1) this.objects.splice(indexOf(this.object))
-        else if (this.srby2 > this.y1) this.objects.splice(indexOf(this.object))
-        else if (this.srbx1 > this.x2) this.objects.splice(indexOf(this.object))
-        else if (this.srby1 < this.y2) this.objects.splice(indexOf(this.object))
+        if (this.srbx2 < this.x1) this.objects.splice(indexOf(this.object), 1)
+        else if (this.srby2 > this.y1) this.objects.splice(indexOf(this.object), 1)
+        else if (this.srbx1 > this.x2) this.objects.splice(indexOf(this.object), 1)
+        else if (this.srby1 < this.y2) this.objects.splice(indexOf(this.object), 1)
     this.object ++
     }
     this.player = PLayer.getComponent(RectRenderer)
@@ -87,8 +87,7 @@ class Turret extends Component{
         if (this.counter = this.breakpoints[this.cycle]){
             this.counter = 0
             this.liney = this.lineys[cycle]
-            this.cycle ++
-        
+            this.cycle ++    
         }
     }
         else{
@@ -97,7 +96,7 @@ class Turret extends Component{
             this.cycle ++
         this.liney = this.lineys[i]
     }}
-        if (this.linex < this.srbx2 && this.linex > this.srbx1 && this.liney > this.srby2 && this.liney < this.srby1) this.objects.splice(indexOf(this.object));{
+        if (this.linex < this.srbx2 && this.linex > this.srbx1 && this.liney > this.srby2 && this.liney < this.srby1) this.objects.splice(indexOf(this.object), 1);{
              this.detection = 0
         i = this.longerlinestuff + 1
 
