@@ -1,11 +1,11 @@
-var turrets = []
-var turrets2 = []
+
 class Turret extends Component{
-
-
+    constructor(firespotx, firespoty) {
+        super()
+        this.firespotx = firespotx
+        this.firespoty = firespoty
+    }
     start(){
-        turrets.push(this)
-        turrets2.push(0)
         this.rb = this.getComponent(DynamicBoxCollider)
         this.rb.applyGravity = false
         this.object = 1
@@ -14,14 +14,21 @@ class Turret extends Component{
         this.x2 = 0
         this.y1 = 0
         this.y2 = 0
-        this.detection = turrets(IndexOf(this))
-    }
+        this.detection = 0
+        }
     update(){ 
-
-        if (this.detection = 1) 
+        if (this.detection = 1) {
+            new GameObject(this.firespotx.x, this.firespoty)
+            .addComponent(new RectRenderer(2, 2, () => {
+                noStroke(0);
+                fill(255, 0, 0);
+            }))
+            .addComponent(new DynamicBoxCollider(2, 2))
+            .addComponent(new Bullet())
+        }
     this.objects = Engine.objects
-    this.objects.splice(IndexOf(this), 1)
-    this.objects.splice(IndexOf(PLayer), 1)
+    this.objects.splice(indexOf(this), 1)
+    this.objects.splice(indexOf(PLayer), 1)
         if (this.gameObject.pos.x < PLayer.pos.x) {this.x1 = this.gameObject.pos.x, this.x2 = PLayer.pos.x} else {this.x1 = this.gameObject.pos.x, this.x2 = PLayer.pos.x}
         if (this.gameObject.pos.y > PLayer.pos.y) {this.y1 = this.gameObject.pos.y, this.y2 = PLayer.pos.y} else {this.y2 = this.gameObject.pos.y, this.y1 = PLayer.pos.y}
     this.object = 1
@@ -34,12 +41,11 @@ class Turret extends Component{
         this.srbx2 = this.srb.size.x
         this.srby1 = this.s.pos.y - srb.size.y / 2
         this.srby2 = this.srb.size.y
-        if (this.srbx2 < this.x1) this.objects.splice(IndexOf(this.object))
-        else if (this.srby2 > this.y1) this.objects.splice(IndexOf(this.object))
-        else if (this.srbx1 > this.x2) this.objects.splice(IndexOf(this.object))
-        else if (this.srby1 < this.y2) this.objects.splice(IndexOf(this.object))
+        if (this.srbx2 < this.x1) this.objects.splice(indexOf(this.object))
+        else if (this.srby2 > this.y1) this.objects.splice(indexOf(this.object))
+        else if (this.srbx1 > this.x2) this.objects.splice(indexOf(this.object))
+        else if (this.srby1 < this.y2) this.objects.splice(indexOf(this.object))
     this.object ++
-    rect(s.pos.x - srb.size.x / 2, s.pos.y - srb.size.y / 2, srb.size.x, srb.size.y)
     }
     this.player = PLayer.getComponent(RectRenderer)
     this.playerx1 = PLayer.pos.x - this.player.size.x / 2
@@ -91,7 +97,7 @@ class Turret extends Component{
             this.cycle ++
         this.liney = this.lineys[i]
     }}
-        if (this.linex < this.srbx2 && this.linex > this.srbx1 && this.liney > this.srby2 && this.liney < this.srby1) this.objects.splice(IndexOf(this.object));{
+        if (this.linex < this.srbx2 && this.linex > this.srbx1 && this.liney > this.srby2 && this.liney < this.srby1) this.objects.splice(indexOf(this.object));{
              this.detection = 0
         i = this.longerlinestuff + 1
 
@@ -112,19 +118,20 @@ class Turret extends Component{
    
 }
 class Bullet extends Component{
-    constructor (mypos, myspeed){
+    constructor (myspeed){
+        super()
      this.myspeed = myspeed
-     this.rb = this.getcomponent(DynamicBoxCollider)
-     this.mypos = mypos
-     this.target = createVector(PLayer.x, PLayer.y)
-     this.mydir = Vector.sub (target, this.mypos)
-     this.mydir.add(random(-0.2, 0.2))
-     this.mydir.setMag(this.myspeed)
-     this.rb.vel.x = this.mydir.x
-     this.rb.vel.y = this.mydir.y
-    
     }
- 
+    start(){
+        this.target = createVector(PLayer.x, PLayer.y)
+        this.rb = this.getComponent(DynamicBoxCollider)
+        this.mydir = Vector.sub (this.target, this.rb.gameObject.pos)
+        this.mydir.mag(this.myspeed)
+        this.rb.vel.x = this.mydir.x
+        this.rb.vel.y = this.mydir.y
+     
+
+    }
  
     draw(){
       if (this.mypos.x > width) this.destroy()
