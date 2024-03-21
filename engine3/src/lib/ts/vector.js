@@ -80,6 +80,9 @@ class Vector {
     static lerp(a, b, t) {
         return Vector.add(Vector.mult(a, 1 - t), Vector.mult(b, t));
     }
+    static dot(a, b) {
+        return a.x * b.x + a.y * b.y;
+    }
     static up() { return new Vector(0, -1); }
     static right() { return new Vector(1, 0); }
     static down() { return new Vector(0, 1); }

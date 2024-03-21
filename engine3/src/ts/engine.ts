@@ -1,5 +1,7 @@
 
 let deltaTime = 0;
+const fixedDeltaTime = 0.01;
+let extraFixedTime = 0;
 let width: number = 400, height: number = 400;
 
 function start() {
@@ -52,12 +54,15 @@ class Engine {
     static update() {
 
         let now = Date.now();
-        deltaTime = (now - Engine.lastUpdate) / Engine.inverseFramerate;
+        deltaTime = (now - Engine.lastUpdate) / 1000.0;
         Engine.lastUpdate = now;
-
-        //@ts-ignore
-        draw();
         
+        extraFixedTime += deltaTime;
+        while (extraFixedTime >= fixedDeltaTime) {
+            Physics.update(fixedDeltaTime);
+            extraFixedTime -= fixedDeltaTime;
+        }
+
         for (let i = 0; i < Engine.objects.length; i++) {
             const gameObject = Engine.objects[i];
             if (gameObject.destroyed)
@@ -65,6 +70,8 @@ class Engine {
             
             gameObject.update();
         }
+        //@ts-ignore
+        draw();
         Input.update();
 
         Renderer.render();

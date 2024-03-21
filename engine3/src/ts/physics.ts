@@ -10,7 +10,118 @@ interface BoxCollision {
     hit: RayHit
 }
 
+class CollisionManifold {
+    rigiA: Rigidbody;
+    rigiB: Rigidbody;
+    /**
+     * @description Points from rigiB to rigiA
+     */
+    normal: Vector;
+    depth: number;
+
+    constructor(rigiA: Rigidbody, rigiB: Rigidbody, normal: Vector, depth: number) {
+        this.rigiA = rigiA;
+        this.rigiB = rigiB;
+        this.normal = new Vector(normal);
+        this.depth = depth;
+    }
+
+    resolveCollision() {
+
+        let relativeVelocity = Vector.sub(this.rigiB.vel, this.rigiA.vel);
+        let relativeVelocityAlongNormal = Vector.dot(relativeVelocity, this.normal);
+
+        if (relativeVelocityAlongNormal > 0) return;
+
+        let e = Math.min(this.rigiA.bounciness, this.rigiB.bounciness);
+        if (!isFinite(e)) e = 0;
+
+        let invMassSum = this.rigiA.invMass + this.rigiB.invMass;
+
+        let j = -(1 + e) * relativeVelocityAlongNormal / invMassSum;
+
+        let impulse = Vector.mult(this.normal, j);
+        let impulseA = Vector.mult(impulse, -this.rigiA.invMass);
+        let impulseB = Vector.mult(impulse, this.rigiB.invMass);
+
+        this.rigiA.vel.add(impulseA);
+        this.rigiB.vel.add(impulseB);
+    }
+
+    positionalCorrection() {
+        let correctionPercentage = 0.2;
+        let amountToCorrect = this.depth / (this.rigiA.invMass + this.rigiB.invMass) * correctionPercentage;
+        let correctionVector = Vector.mult(this.normal, amountToCorrect);
+
+        let rigiACorrection = Vector.mult(correctionVector, -this.rigiA.invMass);
+        let rigiBCorrection = Vector.mult(correctionVector,  this.rigiB.invMass);
+
+        if (!this.rigiA.isKinematic) this.rigiA.gameObject.pos.add(rigiACorrection);
+        if (!this.rigiB.isKinematic) this.rigiB.gameObject.pos.add(rigiBCorrection);
+    }
+}
+
+class Rigidbody extends Component {
+
+    vel: Vector = new Vector();
+    forceAccumulator: Vector = new Vector();
+    applyGravity: boolean = true;
+    mass: number = 1;
+    readonly invMass: number;
+    bounciness: number = 0;
+
+    readonly isKinematic: boolean = false;
+    shape!: Shape;
+
+    constructor(mass: number = 1, bounciness: number = 0) {
+        super();
+        this.mass = mass;
+        this.bounciness = bounciness;
+
+        if (this.mass > 0.0001) this.invMass = 1 / this.mass;
+        else {
+            this.invMass = 0;
+            this.isKinematic = true;
+        }
+
+        Physics.bodies.push(this);
+    }
+
+    start(): void {
+        let shape = <Shape>this.getComponent(<any>Shape);
+        if (!shape) {
+            console.warn("An object with a Rigidbody component must also have a shape component");
+            return;
+        }
+        this.shape = shape;
+    }
+
+    fixedUpdate(deltaTime: number) {
+        if (this.applyGravity) this.applyForce(Physics.gravity);
+
+        let acc = Vector.mult(this.forceAccumulator, this.invMass);
+        this.vel.add(Vector.mult(acc, deltaTime));
+        this.gameObject.pos.add(Vector.mult(this.vel, deltaTime));
+
+        this.vel.mult(0.9999);
+        this.forceAccumulator.mult(0);
+    }
+
+    applyForce(...args: [x: number, y: number] | [v: Vector]) {
+        this.forceAccumulator.add(...args);
+    }
+
+    destroy(): void {
+        Physics.bodies.splice(Physics.bodies.indexOf(this), 1);
+    }
+}
+
 abstract class PhysicsComponent extends Component {
+
+    collisions: Array<BoxCollision> = [];
+    onCollisionEnter: (collision: BoxCollision) => void = () => {};
+    onCollisionExit: (collision: BoxCollision) => void = () => {};
+
     constructor() {
         super();
         Physics.physicsComponents.push(this);
@@ -42,10 +153,6 @@ class DynamicBoxCollider extends BoxCollider {
     vel: Vector;
     applyGravity: boolean = true;
 
-    private collisions: Array<BoxCollision> = [];
-    onCollisionEnter: (collision: BoxCollision) => void = () => {};
-    onCollisionExit: (collision: BoxCollision) => void = () => {};
-
     constructor(w: number, h: number) {
         super(w, h);
 
@@ -68,6 +175,7 @@ class DynamicBoxCollider extends BoxCollider {
     resolveCollisions() {
         if (this.vel.x == 0 && this.vel.y == 0) return;
 
+        // Detect collisions
         let collisions: Array<BoxCollision> = [];
 
         for (const collider of Physics.physicsComponents) {
@@ -80,6 +188,7 @@ class DynamicBoxCollider extends BoxCollider {
                 collisions.push(collision);
         }
 
+        // Resolve collisions (in correct order)
         collisions.sort((a, b) => a.hit.t - b.hit.t);
 
         for (const collision of collisions) {
@@ -94,6 +203,7 @@ class DynamicBoxCollider extends BoxCollider {
             }
         }
 
+        // Call collision events
         for (let i = this.collisions.length - 1; i >= 0; i--) {
             const collision = this.collisions[i];
             if (!collisions.find(col => col.collider == collision.collider)) {
@@ -126,8 +236,86 @@ class DynamicBoxCollider extends BoxCollider {
 
 class Physics {
 
-    static gravity: Vector = createVector(0, 0.5);
+    static gravity: Vector = createVector(0, 30);
+    static readonly bodies: Array<Rigidbody> = [];
     static physicsComponents: Array<PhysicsComponent> = [];
+
+    static update(deltaTime: number) {
+
+        for (const rigiA of this.bodies) {
+            for (const rigiB of this.bodies) {
+                let col = this.checkCollision(rigiA, rigiB);
+                if (!col) continue;
+                
+                col.resolveCollision();
+                col.positionalCorrection();
+            }
+        }
+
+        for (const rb of this.bodies) {
+            rb.fixedUpdate(deltaTime);
+        }
+    }
+
+    private static checkCollision(rigiA: Rigidbody, rigiB: Rigidbody): CollisionManifold | undefined {
+
+        if (rigiA.isKinematic && rigiB.isKinematic) return;
+        
+        if (rigiA.shape instanceof Rect && rigiB.shape instanceof Rect) {
+            return this.rectVsRect(rigiA, rigiB);
+        }
+        else {
+            console.warn(`Collision of invalid shapes: ${rigiA.shape}, ${rigiB.shape}`);
+        }
+
+        return;
+    }
+
+    private static dynamicVsDynamicRect(rigiA: Rigidbody, rigiB: Rigidbody): CollisionManifold | undefined {
+
+        if (rigiA.vel.x == 0 && rigiA.vel.y == 0) return;
+        if (!(rigiA.shape instanceof Rect) || !(rigiB.shape instanceof Rect)) return;
+
+        let pos = new Vector(rigiB.gameObject.pos);
+        let size = Vector.add(rigiA.shape.size, rigiB.shape.size);
+
+        let hit = Physics.rayVsRect(rigiA.gameObject.pos, Vector.mult(rigiA.vel, deltaTime), pos, size);
+        if (!hit || hit.t < 0 || hit.t >= 1) return;
+        
+        return new CollisionManifold(rigiA, rigiB, hit.normal, hit.distance);
+    }
+
+    private static rectVsRect(rigiA: Rigidbody, rigiB: Rigidbody): CollisionManifold | undefined {
+
+        let rectA = <Rect>rigiA.shape;
+        let rectB = <Rect>rigiB.shape;
+
+        let minA = Vector.sub(rigiA.gameObject.pos, Vector.mult(rectA.size, 0.5));
+        let maxA = Vector.add(rigiA.gameObject.pos, Vector.mult(rectA.size, 0.5));
+        let minB = Vector.sub(rigiB.gameObject.pos, Vector.mult(rectB.size, 0.5));
+        let maxB = Vector.add(rigiB.gameObject.pos, Vector.mult(rectB.size, 0.5));
+
+        let maxCorner = Vector.sub(maxA, minB);
+        let minCorner = Vector.sub(minA, maxB);
+
+        let col = maxCorner.x > 0 && maxCorner.y > 0 && minCorner.x < 0 && minCorner.y < 0;
+        if (!col) return;
+
+        minCorner.x = Math.abs(minCorner.x); minCorner.y = Math.abs(minCorner.y);
+        maxCorner.x = Math.abs(maxCorner.x); maxCorner.y = Math.abs(maxCorner.y);
+
+        let depth = Math.min(minCorner.x, minCorner.y, maxCorner.x, maxCorner.y);
+        let normal = new Vector();
+
+        switch (depth) {
+            case minCorner.x: normal.x = -1; break;
+            case minCorner.y: normal.y = -1; break;
+            case maxCorner.x: normal.x =  1; break;
+            case maxCorner.y: normal.y =  1; break;
+        }
+
+        return new CollisionManifold(rigiA, rigiB, normal, depth);
+    }
 
     // pos: center of the rect
     static rayVsRect(origin: Vector, direction: Vector, pos: Vector, size: Vector): RayHit | null {

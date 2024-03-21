@@ -93,8 +93,12 @@ class Vector {
         throw "Invalid arguments";
     }
 
-    static lerp(a: Vector, b: Vector, t: number) {
+    static lerp(a: Vector, b: Vector, t: number): Vector {
         return Vector.add(Vector.mult(a, 1 - t), Vector.mult(b, t));
+    }
+
+    static dot(a: Vector, b: Vector): number {
+        return a.x * b.x + a.y * b.y;
     }
 
     static up(): Vector { return new Vector(0, -1); }
