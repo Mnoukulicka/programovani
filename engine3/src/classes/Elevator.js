@@ -13,6 +13,7 @@ class Elevator extends Component {
         this.x = 0
         this.rb.applyGravity = false
         this.error = false
+        
         this.xx = 0
     }
     update() {
@@ -24,11 +25,14 @@ class Elevator extends Component {
             if (col.hit.normal.y == 1 && col.hit.normal.x == 0){
            if (!col.collider.getComponent(DynamicBoxCollider))
            this.xx = col.collider.getComponent(DynamicBoxCollider)
+           this.xx.applyGravity = false
            this.x = 1
         }
            } 
            if (this.error == true) this.rb.vel.y = -3
            this.rb.onCollisionExit = (col) => {
+            this.xx.applyGravity = true
+            this.error = false
             this.x = 0
         }
 

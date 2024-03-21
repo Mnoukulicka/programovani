@@ -18,10 +18,22 @@ class Player extends Component {
 
     update() {
         if (Input.keyPressed("a"))  { this.rb.vel.x = -2
-             if (this.rb.vel.x == 3){
+             if (this.rb.vel.x == -3){
+            this.rb.vel.x = -5
+        }}
+        else if (Input.keyPressed("d")) { this.rb.vel.x = 2  
+            if (this.rb.vel.x == 3){
             this.rb.vel.x = 5
         }}
-        else if (Input.keyPressed("d")) { this.rb.vel.x = 2 }
+        else if (this.rb.vel.x == 5){
+            this.rb.vel.x = 3
+        }
+        else if (this.rb.vel.x == -5){
+            this.rb.vel.x = -3
+        }
+        else if (this.rb.vel.x == 5){
+            this.rb.vel.x = 3
+        } 
         else this.rb.vel.x = 0
         if (z !== 0) {
             this.rb.vel.x = this.rb.vel.x + w

@@ -113,7 +113,15 @@ function setup() {
             fill(0, 0, 255);
         }))
         .addComponent(new DynamicBoxCollider(50, 10))
-        .addComponent(new Elevator(height/2, height/2 + 200))
+        //.addComponent(new Elevator(height/2, height/2 + 200))
+
+    new GameObject(width / 2 - 200, height / 2 - 50)
+        .addComponent(new RectRenderer(50, 10, () => {
+            noStroke(0);
+            fill(0, 0, 255);
+        }))
+        .addComponent(new DynamicBoxCollider(50, 50))
+        .addComponent(new Turret(width / 2 - 200, height / 2 - 50))
 }
 
 function draw() {
