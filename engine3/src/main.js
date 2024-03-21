@@ -4,6 +4,11 @@ let PLayer
 function setup() {
     size(800, 600);
 
+   // new GameObject(width / 2, height - 5)
+   // .addComponent(new Rect(width * 1000, 10))
+   // .addComponent(new ShapeRenderer())
+   // .addComponent(new Rigidbody(mass (if static, = 0), bounciness))
+
     new GameObject(width / 2, height - 5)
         .addComponent(new RectRenderer(width * 1000, 10, () => {
             noStroke(0);
@@ -88,9 +93,7 @@ function setup() {
             fill(0, 0, 255);
         }))
         .addComponent(x)
-        .addComponent(new MovementPlantform(width / 2 + 100, width / 2 + 350))
-        .addComponent(new Carrier())
-
+        .addComponent(new MovementPlantform(1, width / 2 + 100, width / 2 + 350))
     new GameObject(width / 2 - 20, height / 2 - 170)
         .addComponent(new RectRenderer(20, 20, () => {
             noStroke(0);
@@ -105,7 +108,6 @@ function setup() {
             fill(255, 0, 0);
         }))
         .addComponent(new DynamicBoxCollider(20, 20))
-        .addComponent(new Pushable())
 
     new GameObject(width - 100, height/2)
         .addComponent(new RectRenderer(50, 10, () => {
@@ -113,15 +115,15 @@ function setup() {
             fill(0, 0, 255);
         }))
         .addComponent(new DynamicBoxCollider(50, 10))
-        //.addComponent(new Elevator(height/2, height/2 + 200))
+        .addComponent(new MovementPlantform(2, height - 200, 100))
 
     new GameObject(width / 2 - 200, height / 2 - 50)
         .addComponent(new RectRenderer(50, 10, () => {
             noStroke(0);
             fill(0, 0, 255);
         }))
-        .addComponent(new DynamicBoxCollider(50, 50))
-        .addComponent(new Turret(width / 2 - 200, height / 2 - 50))
+        .addComponent(new DynamicBoxCollider(50, 10))
+       .addComponent(new Turret(width / 2 - 200, height / 2 - 50))
 }
 
 function draw() {

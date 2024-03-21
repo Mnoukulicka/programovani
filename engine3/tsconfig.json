@@ -10,7 +10,8 @@
   },
   "include": [
       "src/ts/*",
-      "src/*.js"
+      "src/*.js",
+      "src/classes/*.js"
   ],
   "exclude": [
       "node_modules"
