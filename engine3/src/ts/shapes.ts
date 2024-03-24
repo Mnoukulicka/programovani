@@ -3,6 +3,7 @@ abstract class Shape extends Component {
     stroke: Color | undefined = new Color(0);
 
     abstract draw(): void;
+    abstract calculateInertia(mass: number): number;
 
     settings() {
         if (this.color)
@@ -45,5 +46,26 @@ class Rect extends Shape {
 
     draw() {
         rect(this.gameObject.pos.x - this.size.x / 2, this.gameObject.pos.y - this.size.y / 2, this.size.x, this.size.y);
+    }
+
+    calculateInertia(mass: number): number {
+        return mass * (this.size.x * this.size.x + this.size.y * this.size.y) / 12.0;
+    }
+}
+
+class Circle extends Shape {
+    radius: number;
+
+    constructor(radius: number) {
+        super();
+        this.radius = radius;
+    }
+
+    draw(): void {
+        circle(this.gameObject.pos.x, this.gameObject.pos.y, this.radius);
+    }
+
+    calculateInertia(mass: number): number {
+        return 0.5 * mass * this.radius * this.radius;
     }
 }
