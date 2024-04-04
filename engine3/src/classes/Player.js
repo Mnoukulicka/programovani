@@ -2,19 +2,20 @@ let w = 0
 let lives = 3
 class Player extends Component {
     start() {
-        this.rb = this.getComponent(DynamicBoxCollider)
+        this.rb = this.getComponent(Rigidbody)
         this.onground = 0
-        this.rb.onCollisionExit = (col) => {
-            if (col.hit.normal.y == -1 && col.hit.normal.x == 0)
-                this.onground = 0
-        }
-        this.rb.onCollisionEnter = (col) => {
-            if (col.collider == -1 && col.hit.normal.x == 0) {
-                this.onground = 1
-            }
-        }
     }
 
+    onCollisionExit(col) {
+        if (col.normal.y == -1 && col.normal.x == 0)
+            this.onground = 0
+    }
+
+    onCollisionEnter(col) {
+        if (col.collider == -1 && col.normal.x == 0) {
+            this.onground = 1
+        }
+    }
 
     update() {
         if (Input.keyPressed("a"))  { this.rb.vel.x = -120
@@ -26,7 +27,7 @@ class Player extends Component {
         }
         this.rb.vel.x * 60
         //if (this.onground == 1) 
-        if (Input.keyJustPressed("w")) this.rb.vel.y = -600
+        if (Input.keyJustPressed("w")) this.rb.vel.y = -180
 
     }
 
