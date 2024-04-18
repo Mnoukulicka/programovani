@@ -9,18 +9,16 @@ class Teleport extends Component{
    start(){
     this.rb = this.getComponent(Rigidbody)
     this.rb.applyGravity = false
-    
-    
    }
+
    onCollisionEnter(col) {
     if (col.collider.isKinematic == true) {
     col.collider.gameObject.pos.x = this.telepointx
     col.collider.gameObject.pos.y = this.telepointy
     }
     }
-   update(){
 
+   update(){
     
 }
-
 }

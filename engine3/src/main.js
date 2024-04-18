@@ -95,6 +95,12 @@ function setup() {
     //     .addComponent(new ShapeRenderer())
     //     .addComponent(new Rigidbody(10, 20))
     //    //.addComponent(new Turret(width / 2 - 200, height / 2 - 50))
+
+    new GameObject(width / 2, height / 2 - 155)
+    .addComponent(new Rect(50, 5))
+    .addComponent(new ShapeRenderer())
+    .addComponent(new Rigidbody(0))
+    .addComponent(new Teleport(0, 0))
 }
 
 function draw() {
