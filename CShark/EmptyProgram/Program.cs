@@ -76,8 +76,8 @@ namespace EmptyProgram
                 }
                 int xxx = 1;
                 while (xxx == 1)
-                xxx = 0;
                 {
+                xxx = 0R;
                     Console.WriteLine("Have you had enough suffering or do you wish to start again?");
                 Console.WriteLine("(Yes or No)");
                 string answer2 = Console.ReadLine();
