@@ -94,8 +94,9 @@ class Rigidbody extends Component {
         this.mass = mass;
         this.bounciness = bounciness;
         this.friction = friction;
-        if (this.mass > 0.0001)
+        if (this.mass > 0.0001) 
             this.invMass = 1 / this.mass;
+            
         else {
             this.invMass = 0;
             this.isKinematic = true;

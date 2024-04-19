@@ -77,14 +77,14 @@ namespace EmptyProgram
                 int xxx = 1;
                 while (xxx == 1)
                 {
-                xxx = 0R;
+                xxx = 0;
                     Console.WriteLine("Have you had enough suffering or do you wish to start again?");
                 Console.WriteLine("(Yes or No)");
                 string answer2 = Console.ReadLine();
                 if (answer2 == "No")
                 {
                     Console.WriteLine("Then try to have fun in other activiteis of your meaningless worthless boring imperfect and truly human life.");
-                    Console.WriteLine("And if you ever find yourself at the lack of torture, remember to come back.");
+                    Console.WriteLine("And if you ever find yourself at the lack of torture, please remember to come back.");
                     x = 0;
                 }
                 else if (answer2 == "Yes")

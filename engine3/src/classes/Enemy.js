@@ -8,7 +8,7 @@ class Enemy extends Component{
    start(){
     this.rb = this.getComponent(Rigidbody)
     this.rb.vel.x = 120
-    this.rb.vel.y = -60
+   // this.rb.vel.y = -60
     this.timer = 0
    }
 
@@ -25,9 +25,9 @@ class Enemy extends Component{
     this.timer ++
     this.onground = 0
     this.rb.vel.y = -1
-    if (this.timer == 2){
-    this.rb.vel.y = this.rb.vel.y*-1
-    this.timer = 0}
+   //  if (this.timer == 2){
+   //  this.rb.vel.y = this.rb.vel.y*-1
+   //  this.timer = 0}
    if (this.rb.gameObject.pos.x > this.stoppoint) this.rb.vel.x = -120
    if (this.rb.gameObject.pos.x < this.basepoint) this.rb.vel.x = 120
    }

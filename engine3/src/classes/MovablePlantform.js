@@ -15,9 +15,9 @@ class MovementPlantform extends Component {
         this.rb.applyGravity = false
     }
     onCollisionEnter = (col) => {
-        if (this.rb.vel.x = 120) this.rb.vel.x = -120
-        if (this.rb.vel.x = -120) this.rb.vel.x = 120
-
+        if (col.collider.isKinematic == true) {
+            this.rb.vel.y = this.rb.vel.y * -1
+        }
     }
     update() {
         if (this.xy == 1) {
@@ -30,6 +30,5 @@ class MovementPlantform extends Component {
             if (this.rb.gameObject.pos.y > this.basepoint) this.rb.vel.y = -120
             this.gameObject.pos.x = this.axis
         }
-
     }
 }

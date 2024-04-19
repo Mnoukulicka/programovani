@@ -1,4 +1,4 @@
-
+let teleportsOn = []
 class Teleport extends Component{
     constructor(telepointx, telepointy){
         super()
@@ -8,13 +8,15 @@ class Teleport extends Component{
 
    start(){
     this.rb = this.getComponent(Rigidbody)
-    this.rb.applyGravity = false
+
+    // teleportsOn.add(0)
+    // this.IndexOfTeleport = teleportsOn.length
    }
 
    onCollisionEnter(col) {
-    if (col.collider.isKinematic == true) {
-    col.collider.gameObject.pos.x = this.telepointx
-    col.collider.gameObject.pos.y = this.telepointy
+    if (col.collider.isKinematic == false) {
+     col.collider.gameObject.pos.x = this.telepointx
+     col.collider.gameObject.pos.y = this.telepointy
     }
     }
 
