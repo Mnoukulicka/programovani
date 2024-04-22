@@ -7,8 +7,7 @@ class Turret extends Component {
     }
     start() {
         this.rb = this.getComponent(DynamicBoxCollider)
-        this.rb.applyGravity = false
-        this.object = 1
+        this.rb.applyGravity = false    
         this.objects = Engine.objects
         this.x1 = 0
         this.x2 = 0
@@ -27,18 +26,19 @@ class Turret extends Component {
         //         .addComponent(new Bullet())
         // }
         this.objects = Array.from(Engine.objects);
+        this.object = 1
         this.objects.splice(this.objects.indexOf(this.gameObject), 1)
         this.objects.splice(this.objects.indexOf(PLayer), 1)
         if (this.gameObject.pos.x < PLayer.pos.x) { this.x1 = this.gameObject.pos.x, this.x2 = PLayer.pos.x } else { this.x1 = this.gameObject.pos.x, this.x2 = PLayer.pos.x }
         if (this.gameObject.pos.y > PLayer.pos.y) { this.y1 = this.gameObject.pos.y, this.y2 = PLayer.pos.y } else { this.y2 = this.gameObject.pos.y, this.y1 = PLayer.pos.y }
         if (Math.sqrt((this.y2 - this.y1) * (this.y2 - this.y1) + (this.x2 - this.x1) * (this.x2 - this.x1)) < 300) {
             for (this.object of this.objects) {
-                this.s = this.object
+                this.s = this.objects.at(this.object)
                 this.srb = this.s.getComponent(RectRenderer)
-                this.srbx1 = this.s.pos.x - this.srb.size.x / 2
-                this.srbx2 = this.srb.size.x
-                this.srby1 = this.s.pos.y - this.srb.size.y / 2
-                this.srby2 = this.srb.size.y
+                this.srbx1 = this.s.pos.x - this.srb.size.w / 2
+                this.srbx2 = this.srb.size.w
+                this.srby1 = this.s.pos.y - this.srb.size.w / 2
+                this.srby2 = this.srb.size.w
                 if (this.srbx2 < this.x1) this.objects.splice(this.objects.indexOf(this.object), 1)
                 else if (this.srby2 > this.y1) this.objects.splice(this.objects.indexOf(this.object), 1)
                 else if (this.srbx1 > this.x2) this.objects.splice(this.objects.indexOf(this.object), 1)
@@ -87,13 +87,13 @@ class Turret extends Component {
                             this.linex = this.linexes[i]
                             if (this.counter = this.breakpoints[this.cycle]) {
                                 this.counter = 0
-                                this.liney = this.lineys[cycle]
+                                this.liney = this.lineys[this.cycle]
                                 this.cycle++
                             }
                         }
                         else {
                             this.counter = 0
-                            this.linex = this.linexes[cycle]
+                            this.linex = this.linexes[this.cycle]
                             this.cycle++
                             this.liney = this.lineys[i]
                         }
@@ -114,9 +114,9 @@ class Turret extends Component {
                 this.linexes.slice(0, this.linexes.length)
                 this.lineys.slice(0, this.lineys.length)
             }
+            this.object = 1
         }
     }
-
 }
 class Bullet extends Component {
     constructor(myspeed) {
@@ -130,8 +130,6 @@ class Bullet extends Component {
         this.mydir.mag(this.myspeed)
         this.rb.vel.x = this.mydir.x
         this.rb.vel.y = this.mydir.y
-
-
     }
 
     draw() {

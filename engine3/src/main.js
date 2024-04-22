@@ -10,17 +10,12 @@ function setup() {
    // .addComponent(new Rigidbody(mass (if static, = 0), bounciness))
 
     new GameObject(width / 2, height - 5)
-        .addComponent(new RectRenderer(width * 1000, 10, () => {
-            noStroke(0);
-            fill(0, 0, 255);
-        }))
-        .addComponent(new BoxCollider(width * 1000, 10))
+        .addComponent(new Rect(width * 1000, 10))
+        .addComponent(new ShapeRenderer())
+        .addComponent(new Rigidbody(0, 0))
 
     new GameObject(width, height / 2)
-        .addComponent(new RectRenderer(10, height - 50, () => {
-            noStroke(0);
-            fill(0, 0, 255);
-        }))
+        .addComponent(new Rect())
         .addComponent(new BoxCollider(10, height - 50))
 
     new GameObject(width + 20, -height + 300)
