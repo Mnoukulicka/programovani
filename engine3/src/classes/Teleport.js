@@ -1,4 +1,4 @@
-
+let teleportsOn = []
 class Teleport extends Component{
     constructor(telepointx, telepointy){
         super()
@@ -7,15 +7,20 @@ class Teleport extends Component{
     }
 
    start(){
-    this.rb = this.getComponent(DynamicBoxCollider)
-    this.rb.applyGravity = false
+    this.rb = this.getComponent(Rigidbody)
 
+    // teleportsOn.add(0)
+    // this.IndexOfTeleport = teleportsOn.length
    }
-   update(){
-   this.rb.onCollisionEnter = (col) => {
-    
-}
-    
-}
 
+   onCollisionEnter(col) {
+    if (col.collider.isKinematic == false) {
+     col.collider.gameObject.pos.x = this.telepointx
+     col.collider.gameObject.pos.y = this.telepointy
+    }
+    }
+
+   update(){
+    
+}
 }
