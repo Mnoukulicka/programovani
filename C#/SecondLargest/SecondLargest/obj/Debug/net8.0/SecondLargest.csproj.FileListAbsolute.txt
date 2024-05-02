@@ -1,0 +1,15 @@
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\obj\Debug\net8.0\SecondLargest.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\obj\Debug\net8.0\SecondLargest.AssemblyInfoInputs.cache
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\obj\Debug\net8.0\SecondLargest.AssemblyInfo.cs
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\obj\Debug\net8.0\SecondLargest.csproj.CoreCompileInputs.cache
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\obj\Debug\net8.0\SecondLargest.sourcelink.json
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\bin\Debug\net8.0\SecondLargest.exe
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\bin\Debug\net8.0\SecondLargest.deps.json
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\bin\Debug\net8.0\SecondLargest.runtimeconfig.json
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\bin\Debug\net8.0\SecondLargest.dll
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\bin\Debug\net8.0\SecondLargest.pdb
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\obj\Debug\net8.0\SecondLargest.dll
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\obj\Debug\net8.0\refint\SecondLargest.dll
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\obj\Debug\net8.0\SecondLargest.pdb
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\obj\Debug\net8.0\SecondLargest.genruntimeconfig.cache
+c:\Users\student\programování\programovani\C#\SecondLargest\SecondLargest\obj\Debug\net8.0\ref\SecondLargest.dll

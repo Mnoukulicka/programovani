@@ -1,0 +1,15 @@
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\bin\Debug\net8.0\Rozcvicka.exe
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\bin\Debug\net8.0\Rozcvicka.deps.json
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\bin\Debug\net8.0\Rozcvicka.runtimeconfig.json
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\bin\Debug\net8.0\Rozcvicka.dll
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\bin\Debug\net8.0\Rozcvicka.pdb
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\obj\Debug\net8.0\Rozcvicka.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\obj\Debug\net8.0\Rozcvicka.AssemblyInfoInputs.cache
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\obj\Debug\net8.0\Rozcvicka.AssemblyInfo.cs
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\obj\Debug\net8.0\Rozcvicka.csproj.CoreCompileInputs.cache
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\obj\Debug\net8.0\Rozcvicka.sourcelink.json
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\obj\Debug\net8.0\Rozcvicka.dll
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\obj\Debug\net8.0\refint\Rozcvicka.dll
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\obj\Debug\net8.0\Rozcvicka.pdb
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\obj\Debug\net8.0\Rozcvicka.genruntimeconfig.cache
+c:\Users\student\programování\programovani\C#\Rozcvicka\Rozcvicka\obj\Debug\net8.0\ref\Rozcvicka.dll
