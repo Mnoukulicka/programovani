@@ -61,7 +61,7 @@
                 list2[i] = FindLargest(list3);
                 list3.Remove(FindLargest(list3));
             }
-             return list2[n];
+            return list2[n];
         }
     }
 }
