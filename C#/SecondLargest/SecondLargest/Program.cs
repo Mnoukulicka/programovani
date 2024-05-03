@@ -53,15 +53,13 @@
 
         public static int NthLargest(int[] list, int n)
         {
-            int[] list2 = new int[n];
             // int[] list3 = new int[list.Length];
             var list3 = new List<int>(list);
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i+1 < n; i++)
             {
-                list2[i] = FindLargest(list3);
                 list3.Remove(FindLargest(list3));
             }
-            return list2[n];
+            return FindLargest(list3);
         }
     }
 }
