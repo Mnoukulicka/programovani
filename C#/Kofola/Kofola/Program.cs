@@ -9,7 +9,16 @@
 
         public static string VyresProblem(int cenaVelkeho, int objemVelkeho, int cenaMaleho, int objemMaleho)
         {
-            string vysledek = "NEVIM";
+            string vysledek = "BBB";
+            if (objemVelkeho/(float)cenaVelkeho >= objemMaleho/(float)cenaMaleho)
+            {
+                vysledek = "VETSI";
+            }
+            else
+            {
+                vysledek = "MENSI";
+            }
+            
 
             return vysledek;
         }

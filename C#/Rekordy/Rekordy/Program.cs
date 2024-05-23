@@ -10,8 +10,18 @@
         public static string VyresProblem(int[] data)
         {
             int pocetRekordu = 0;
-
-            return pocetRekordu.ToString();
+            int rekord = 0;
+            foreach (var item in data)
+            {
+                if (item > rekord)
+                {
+                    pocetRekordu++;
+                    rekord = item;
+                }
+               
+            }
+             return pocetRekordu.ToString();
         }
     }
 }
+

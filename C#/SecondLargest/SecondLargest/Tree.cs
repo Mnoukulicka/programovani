@@ -1,4 +1,4 @@
-class Tree
+public class Tree
 {
     List<int> aListThatAintAField = [];
     public void Add(int x)
@@ -9,7 +9,7 @@ class Tree
         int parentsIndex = Ancestor(index);
         int parent = aListThatAintAField[parentsIndex];
 
-        while (index != 0 && index > parent)
+        while (index != 0 && aListThatAintAField[index] > parent)
         {
             parentsIndex = Ancestor(index);
             parent = aListThatAintAField[parentsIndex];
@@ -25,6 +25,8 @@ class Tree
         }
         int myreturn = aListThatAintAField[0];
         aListThatAintAField[0] = aListThatAintAField[^1];
+        aListThatAintAField.RemoveAt(aListThatAintAField.Count - 1);
+
         int index = 0;
         while (true)
         {
@@ -34,23 +36,20 @@ class Tree
             if (leftIndex >= aListThatAintAField.Count) break;
 
             int childIndex;
-            if (aListThatAintAField[leftIndex] > aListThatAintAField[rightIndex])
+            if (rightIndex < aListThatAintAField.Count && aListThatAintAField[rightIndex] > aListThatAintAField[leftIndex])
             {
-                childIndex = aListThatAintAField[leftIndex];
+                childIndex = rightIndex;
             }
             else
             {
-                childIndex = aListThatAintAField[rightIndex];
+                childIndex =leftIndex;
             }
             if (aListThatAintAField[childIndex] > aListThatAintAField[index])
             {
                 (aListThatAintAField[index], aListThatAintAField[childIndex], index) = (aListThatAintAField[childIndex], aListThatAintAField[index], childIndex);
             }
+            else break;
         }
-
-
-
-
         return myreturn;
     }
     int Ancestor(int i) => (i - 1) / 2;

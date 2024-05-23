@@ -63,4 +63,49 @@ namespace TestsNS
         [TestMethod] public void NMax_4() => Base([84, 48, 83, 80, 62, 40], 6);
         [TestMethod] public void NMax_5() => Base([69, 99, 95, 94, 49, 13, 16, 43, 36, 88, 29, 45, 13], 13);
     }
+
+    [TestClass]
+    public class HeapTests
+    {
+        [TestMethod]
+        public void Test1()
+
+        {
+            Tree tree = new Tree();
+            tree.Add(5);
+            tree.Add(2);
+            tree.Add(7);
+            tree.Add(6);
+            tree.Add(8);
+            tree.Add(1);
+            Assert.AreEqual(8, tree.AntiAdd());
+        }
+
+        [TestMethod]
+        public void Test2()
+
+        {
+            Tree tree = new Tree();
+            tree.Add(5);
+            tree.Add(2);
+            tree.Add(7);
+            Assert.AreEqual(7, tree.AntiAdd());
+
+        }
+
+        [TestMethod]
+        public void Test3()
+        {
+
+            Tree tree = new Tree();
+            tree.Add(5);
+            tree.Add(2);
+            tree.Add(1);
+            tree.Add(1);
+            tree.Add(7);
+            tree.Add(11);
+
+            Assert.AreEqual(11, tree.AntiAdd());
+        }
+    }
 }
