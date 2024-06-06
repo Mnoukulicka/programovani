@@ -8,10 +8,12 @@ namespace Maze
     public class Game : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager _graphics;
+        public const int CellSize = 20;
         private SpriteBatch _spriteBatch;
 
         private Texture2D texture;
 
+        Cell[,] maze;
         public Game()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -21,7 +23,17 @@ namespace Maze
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            // TODO: Add your initialization logic here=
+            int width = GraphicsDevice.Viewport.Width;
+            int height = GraphicsDevice.Viewport.Height;
+            maze = new Cell[width / CellSize, height / CellSize];
+            for (int i = 0; i < maze.GetLength(0); i++)
+            {
+                for (int j = 0; j < maze.GetLength(1); j++)
+                {
+                    maze[i, j] = new Cell(maze, i, j);
+                }
+            }
 
             texture = new Texture2D(GraphicsDevice, 1, 1);
             texture.SetData(new Color[] { Color.White });
@@ -52,8 +64,13 @@ namespace Maze
 
             _spriteBatch.Begin();
 
-            DrawRect(100, 100, 200, 50);
-
+            for (int i = 0; i < maze.GetLength(0); i++)
+            {
+                for (int j = 0; j < maze.GetLength(1); j++)
+                {
+                    maze[i, j].Draw(this);
+                }
+            }
             _spriteBatch.End();
 
             base.Draw(gameTime);
